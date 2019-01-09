@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-      }
-    </style>
+    <title>Locale Switcher</title>
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <ul>
-      <li><button id="en-US">en-US</button></li>
-      <li><button id="de-DE">de-DE</button></li>
-      <li><button id="fr-FR">fr-FR</button></li>
+    <ul class="locale-list">
+      <li>
+        <button id="en-US">
+          <div class="locale-name">🇺🇸 English (US)</div>
+          <div class="locale-code">en-US</div>
+        </button>
+      </li>
+      <li>
+        <button id="de-DE">
+          <div class="locale-name">🇩🇪 German</div>
+          <div class="locale-code">de-DE</div>
+        </button>
+      </li>
+      <li>
+        <button id="fr-FR">
+          <div class="locale-name">🇫🇷 French</div>
+          <div class="locale-code">fr-FR</div>
+        </button>
+      </li>
     </ul>
   </body>
   <script src="popup.js"></script>

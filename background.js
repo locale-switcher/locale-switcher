@@ -2,20 +2,17 @@ var locale = null;
 
 chrome.storage.local.get(["locale"], function(result) {
   if (result) {
-    locale = result;
+    locale = result.locale;
   }
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   var change = changes.locale;
   if (change) {
-    console.log(
-      "[background] storage.locale changed from " +
-        change.oldValue +
-        " to " +
-        change.newValue
-    );
     locale = change.newValue;
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      chrome.tabs.reload(tabs[0].id);
+    });
   }
 });
 
