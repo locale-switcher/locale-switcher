@@ -17,14 +17,14 @@ button {
   font-size: 12px;
 }
 
-.locale-list {
+.App-LocaleList {
   margin: 0;
   padding: 0;
 
   list-style: none;
 }
 
-.locale-list button {
+.App-LocaleList button {
   display: flex;
   justify-content: space-between;
 
@@ -39,7 +39,7 @@ button {
   background: transparent;
 }
 
-.locale-list button:hover {
+.App-LocaleList button:hover {
   background-color: #eaebeb;
 }
 

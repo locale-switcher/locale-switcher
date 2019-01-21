@@ -2,16 +2,26 @@
   "name": "locale-switcher",
   "license": "MIT",
   "scripts": {
+    "data-locales": "curl https://raw.githubusercontent.com/umpirsky/locale-list/master/data/en/locales.json > popup/data/locales.json",
     "start": "parcel manifest.json --no-hmr --out-dir build/debug",
     "build": "parcel build manifest.json --no-source-maps --out-dir build/release",
     "release": "npm run build && zip build/release release.zip"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "parcel-bundler": "^1.11.0",
     "parcel-plugin-web-extension": "^1.5.1"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
+    "locale-emoji": "^0.3.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   }
 }

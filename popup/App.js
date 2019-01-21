@@ -1,30 +1,65 @@
 import React from "react";
+import localeEmoji from "locale-emoji";
+
+import namesByLocale from "./data/locales";
+
+import LocaleItem from "./LocaleItem";
 
 import "./App.css";
 
+const POPULAR_LOCALES = [
+  "en",
+  "zh",
+  "es",
+  "ar",
+  "pt",
+  "id",
+  "fr",
+  "ja",
+  "ru",
+  "de"
+];
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedLocale: null
+    };
+  }
+
+  handleLocaleClick = locale => {
+    chrome.storage.local.set({ locale }, () => {
+      this.setState({ selectedLocale: locale });
+    });
+  };
+
+  renderLocaleItems = locales => {
+    return locales.map(locale => {
+      const name = namesByLocale[locale];
+      const emoji = localeEmoji(locale);
+      const selected = this.state.selectedLocale === locale;
+
+      const props = {
+        locale,
+        emoji,
+        name,
+        selected,
+        onClick: this.handleLocaleClick
+      };
+
+      return <LocaleItem key={locale} {...props} />;
+    });
+  };
+
   render() {
     return (
-      <ul class="locale-list">
-        <li>
-          <button id="en-US">
-            <div class="locale-name">🇺🇸 English (US)</div>
-            <div class="locale-code">en-US</div>
-          </button>
-        </li>
-        <li>
-          <button id="de-DE">
-            <div class="locale-name">🇩🇪 German</div>
-            <div class="locale-code">de-DE</div>
-          </button>
-        </li>
-        <li>
-          <button id="fr-FR">
-            <div class="locale-name">🇫🇷 French</div>
-            <div class="locale-code">fr-FR</div>
-          </button>
-        </li>
-      </ul>
+      <div className="App">
+        <ul className="App-LocaleList">
+          {this.renderLocaleItems(POPULAR_LOCALES)}
+        </ul>
+      </div>
     );
   }
 }
