@@ -1,0 +1,17 @@
+{
+  "name": "locale-switcher",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel manifest.json --no-hmr --out-dir build/debug",
+    "build": "parcel build manifest.json --no-source-maps --out-dir build/release",
+    "release": "npm run build && zip build/release release.zip"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0",
+    "parcel-plugin-web-extension": "^1.5.1"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
