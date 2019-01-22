@@ -10,6 +10,8 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   var change = changes.locale;
   if (change) {
     locale = change.newValue;
+
+    chrome.browserAction.setBadgeText({ text: locale });
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       chrome.tabs.reload(tabs[0].id);
     });

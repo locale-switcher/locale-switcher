@@ -1,0 +1,28 @@
+.LocaleItem button {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 40px;
+
+  padding: 8px 12px;
+  line-height: 24px;
+
+  font-size: 12px;
+
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+.LocaleItem button:hover {
+  background-color: #eaebeb;
+}
+
+.LocaleItem-Code {
+  opacity: 0.65;
+}
+
+.LocaleItem--selected button {
+  background-color: #a1b9eb;
+}

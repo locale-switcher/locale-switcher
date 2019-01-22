@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import "./LocaleItem.css";
+
 class LocaleItem extends React.Component {
   handleClick = () => {
     const { locale, onClick } = this.props;
@@ -11,16 +13,16 @@ class LocaleItem extends React.Component {
     const { locale, emoji, name, selected } = this.props;
 
     const classes = classNames("LocaleItem", {
-      selected
+      "LocaleItem--selected": selected
     });
 
     return (
       <li className={classes}>
-        <button id={locale} onClick={this.handleClick}>
-          <div className="locale-name">
+        <button onClick={this.handleClick}>
+          <div className="LocaleItem-Name">
             {emoji} {name}
           </div>
-          <div className="locale-code">{locale}</div>
+          <div className="LocaleItem-Code">{locale}</div>
         </button>
       </li>
     );
