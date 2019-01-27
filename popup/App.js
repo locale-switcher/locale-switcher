@@ -25,21 +25,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      selectedLocale: null,
-      showingAll: false
+      selectedLocale: null
     };
   }
-
-  searchInput = null;
 
   componentDidMount() {
     chrome.storage.local.get("locale", ({ locale }) => {
       if (locale) {
-        this.setState({ locale });
+        this.setState({ selectedLocale: locale });
       }
     });
-
-    this.searchInput.focus();
   }
 
   handleSearch = e => {
@@ -77,18 +72,12 @@ class App extends React.Component {
           className="App-Search"
           type="search"
           placeholder="Search..."
-          autofocus={true}
+          autoFocus={true}
           onChange={this.handleSearch}
-          ref={i => (this.searchInput = i)}
         />
         <ul className="App-LocaleList">
           {this.renderLocaleItems(POPULAR_LOCALES)}
         </ul>
-        {!this.state.showingAll ? (
-          <button className="App-ShowAll" onClick={this.handleShowAll}>
-            Show all locales...
-          </button>
-        ) : null}
       </div>
     );
   }

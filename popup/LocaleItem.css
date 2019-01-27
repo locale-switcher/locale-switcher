@@ -1,4 +1,6 @@
 .LocaleItem button {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
 
@@ -23,6 +25,15 @@
   opacity: 0.65;
 }
 
-.LocaleItem--selected button {
-  background-color: #a1b9eb;
+.LocaleItem--selected button::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background-color: #3367d6;
 }
