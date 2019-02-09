@@ -17,12 +17,21 @@
   background: transparent;
 }
 
-.LocaleItem button:hover {
-  background-color: #eaebeb;
+.LocaleItem-Name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .LocaleItem-Code {
+  flex-grow: 1;
+  margin-left: 4px;
+  text-align: right;
   opacity: 0.65;
+}
+
+.LocaleItem--focused button {
+  background-color: #eaebeb;
 }
 
 .LocaleItem--selected button::before {
@@ -35,5 +44,10 @@
 
   width: 2px;
 
-  background-color: #3367d6;
+  background-color: #4688f1;
+}
+
+.LocaleItem--no-emoji .LocaleItem-Emoji {
+  color: transparent;
+  text-shadow: 0 0 0 #5f6368;
 }
