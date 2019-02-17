@@ -28,7 +28,6 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       }
     }
     const result = { requestHeaders: details.requestHeaders };
-    console.log(result);
     return result;
   },
   {
