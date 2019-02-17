@@ -34,6 +34,10 @@
   background-color: #eaebeb;
 }
 
+.LocaleItem button:active {
+  background-color: #e2e2e2;
+}
+
 .LocaleItem--selected button::before {
   content: "";
 

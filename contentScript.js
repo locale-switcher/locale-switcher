@@ -1,15 +1,16 @@
-var locale = null;
+let locale = null;
 
-chrome.storage.local.get(["locale"], function(result) {
+chrome.storage.local.get(["locale"], result => {
   if (result) {
     locale = result.locale;
   }
-  embedScript();
+
+  if (locale) embedScript();
 });
 
-function embedScript() {
-  var code = `
-    (function() {
+const embedScript = () => {
+  const code = `
+    (() => {
       Object.defineProperties(Navigator.prototype, {
         language: {
           value: '${locale}',
@@ -26,8 +27,8 @@ function embedScript() {
       });
     })();`;
 
-  var script = document.createElement("script");
+  const script = document.createElement("script");
   script.textContent = code;
   document.documentElement.prepend(script);
   script.remove();
-}
+};

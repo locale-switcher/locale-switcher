@@ -1,3 +1,7 @@
+.App {
+  outline: 0;
+}
+
 .App-LocaleList {
   margin: 0;
   padding: 0;
@@ -5,19 +9,47 @@
   list-style: none;
 }
 
-.App-Search {
-  height: 32px;
-  width: 216px;
+.App-SearchAndReset {
+  display: flex;
 
   margin: 12px;
+}
+
+.App-Search {
+  flex-grow: 1;
+  height: 32px;
+
+  margin-right: 8px;
   padding: 8px 12px;
 
   font-size: 12px;
 
   border: 1px solid #ccc;
+  border-radius: 2px;
 }
 
 .App-Search:focus {
   border-color: #a1b9eb;
   outline: 0;
+}
+
+.App-Reset {
+  height: 32px;
+
+  padding: 8px;
+
+  background-color: transparent;
+  border: 1px solid #ccc;
+  outline: 0;
+
+  border-radius: 2px;
+}
+
+.App-Reset:hover,
+.App-Reset:focus {
+  background-color: #eaebeb;
+}
+
+.App-Reset:active {
+  background-color: #e2e2e2;
 }

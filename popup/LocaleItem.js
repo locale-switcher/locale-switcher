@@ -9,11 +9,6 @@ class LocaleItem extends React.Component {
     onClick(locale);
   };
 
-  handleMouseEnter = () => {
-    const { locale, onMouseEnter } = this.props;
-    onMouseEnter(locale);
-  };
-
   render() {
     const { locale, emoji, name, focused, selected } = this.props;
 
@@ -24,8 +19,12 @@ class LocaleItem extends React.Component {
     });
 
     return (
-      <li className={classes} onMouseEnter={this.handleMouseEnter}>
-        <button onClick={this.handleClick} title={`${name} (${locale})`}>
+      <li className={classes} onMouseEnter={this.props.onMouseEnter}>
+        <button
+          onFocus={this.props.onFocus}
+          onClick={this.handleClick}
+          title={`${name} (${locale})`}
+        >
           <div className="LocaleItem-Name">
             <span className="LocaleItem-Emoji">{emoji || "🇺🇳"} </span>
             {name}

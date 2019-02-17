@@ -44,48 +44,56 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      focusedLocale: null,
+      focusedIndex: 0,
       selectedLocale: null,
-      visibleLocales: []
+      visibleLocales: POPULAR_LOCALES
     };
   }
 
   componentDidMount() {
     chrome.storage.local.get("locale", ({ locale }) => {
       if (locale) {
-        this.setState({ focusedLocale: locale, selectedLocale: locale }, () => {
+        this.setState({ selectedLocale: locale }, () => {
           this.updateVisibleLocales();
         });
-      } else {
-        this.updateVisibleLocales();
       }
     });
   }
 
   updateVisibleLocales = searchResults => {
-    const { selectedLocale } = this.state;
+    const { focusedIndex, selectedLocale, visibleLocales } = this.state;
 
     const selectedAndPopularLocales =
       selectedLocale && POPULAR_LOCALES.indexOf(selectedLocale) === -1
         ? [selectedLocale, ...POPULAR_LOCALES]
         : POPULAR_LOCALES;
 
-    const visibleLocales =
+    const newVisibleLocales =
       searchResults && searchResults.length > 0
         ? searchResults
         : selectedAndPopularLocales;
-    this.setState({ visibleLocales });
+    const newFocusedIndex =
+      focusedIndex >= newVisibleLocales.length ? 0 : focusedIndex;
+    this.setState({
+      visibleLocales: newVisibleLocales,
+      focusedIndex: newFocusedIndex
+    });
   };
 
   moveFocusedPosition = difference => {
-    const { focusedLocale, visibleLocales } = this.state;
+    const { focusedIndex, visibleLocales } = this.state;
 
-    const focusedIndex = visibleLocales.indexOf(focusedLocale);
-    const nextIndex = (focusedIndex + difference) % visibleLocales.length;
-    const nextLocale = visibleLocales[nextIndex];
-
+    const nextFocusedIndex =
+      (focusedIndex + difference + visibleLocales.length) %
+      visibleLocales.length;
     this.setState({
-      focusedLocale: nextLocale
+      focusedIndex: nextFocusedIndex
+    });
+  };
+
+  updateSelectedLocale = locale => {
+    chrome.storage.local.set({ locale }, () => {
+      this.setState({ selectedLocale: locale });
     });
   };
 
@@ -101,9 +109,16 @@ class App extends React.Component {
     switch (e.key) {
       case "ArrowUp":
         this.moveFocusedPosition(-1);
+        e.preventDefault();
         break;
       case "ArrowDown":
         this.moveFocusedPosition(1);
+        e.preventDefault();
+        break;
+      case "Enter":
+        this.updateSelectedLocale(
+          this.state.visibleLocales[this.state.focusedIndex]
+        );
         break;
       case "Escape":
         if (!value) window.close();
@@ -111,25 +126,23 @@ class App extends React.Component {
     }
   };
 
-  handleLocaleClick = locale => {
-    chrome.storage.local.set({ locale }, () => {
-      this.setState({ selectedLocale: locale });
-    });
+  handleReset = () => {
+    this.updateSelectedLocale(null);
   };
 
-  handleLocaleMouseEnter = locale => {
+  handleLocaleFocus = index => () => {
     this.setState({
-      focusedLocale: locale
+      focusedIndex: index
     });
   };
 
   renderLocaleItems = () => {
-    const { focusedLocale, selectedLocale, visibleLocales } = this.state;
+    const { focusedIndex, selectedLocale, visibleLocales } = this.state;
 
     return visibleLocales.map((locale, i) => {
       const name = namesByLocale[locale];
       const emoji = localeEmoji(locale);
-      const focused = focusedLocale === locale;
+      const focused = focusedIndex === i;
       const selected = selectedLocale === locale;
 
       const props = {
@@ -138,8 +151,9 @@ class App extends React.Component {
         name,
         focused,
         selected,
-        onMouseEnter: this.handleLocaleMouseEnter,
-        onClick: this.handleLocaleClick
+        onMouseEnter: this.handleLocaleFocus(i),
+        onFocus: this.handleLocaleFocus(i),
+        onClick: this.updateSelectedLocale
       };
 
       return <LocaleItem key={locale} {...props} />;
@@ -148,19 +162,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <input
-          className="App-Search"
-          type="search"
-          placeholder="Search..."
-          maxLength={32}
-          autoFocus={true}
-          onChange={this.handleSearchChange}
-          onKeyDown={this.handleSearchKeyDown}
-        />
-        <ul className="App-LocaleList">
-          {this.renderLocaleItems(POPULAR_LOCALES)}
-        </ul>
+      <div className="App" tabIndex="0" onKeyDown={this.handleSearchKeyDown}>
+        <div className="App-SearchAndReset">
+          <input
+            className="App-Search"
+            type="search"
+            placeholder="Search..."
+            maxLength={32}
+            autoFocus={true}
+            onChange={this.handleSearchChange}
+          />
+          <button
+            className="App-Reset"
+            title="Reset locale"
+            onClick={this.handleReset}
+          >
+            Reset
+          </button>
+        </div>
+        <ul className="App-LocaleList">{this.renderLocaleItems()}</ul>
       </div>
     );
   }
