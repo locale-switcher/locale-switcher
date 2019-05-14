@@ -28,6 +28,7 @@
   margin-left: 4px;
   text-align: right;
   opacity: 0.65;
+  white-space: nowrap;
 }
 
 .LocaleItem--focused button {

@@ -8,18 +8,18 @@
     "release": "npm run build && zip -r build/$(git rev-parse --short HEAD).zip build/release"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "parcel-bundler": "^1.11.0",
-    "parcel-plugin-web-extension": "^1.5.1"
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-web-extension": "^1.5.2"
   },
   "dependencies": {
     "classnames": "^2.2.6",
     "fuse": "^0.4.0",
-    "fuse.js": "^3.3.0",
+    "fuse.js": "^3.4.4",
     "locale-emoji": "^0.3.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "babel": {
     "plugins": [
