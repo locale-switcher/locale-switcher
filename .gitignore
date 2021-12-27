@@ -1,4 +1,7 @@
 node_modules
-.cache
-build
-release.zip
+
+# Cache & Build
+.parcel-cache
+dist
+web-ext-artifacts
+*.zip
