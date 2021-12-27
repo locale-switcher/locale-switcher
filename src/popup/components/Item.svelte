@@ -7,7 +7,7 @@
   export let focused = false
   let element
 
-  $: name = locales[code]
+  $: name = locales[code].name
   $: emoji = localeEmoji(code) || '🇺🇳'
 
   $: if (focused) {
