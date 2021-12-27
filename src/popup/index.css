@@ -27,13 +27,16 @@ body {
     'Helvetica Neue', sans-serif;
   font-size: 16px;
 
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: none;
 }
 
 main {
   padding: 1rem;
   overflow: auto;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
 }
 
 /* Input */
