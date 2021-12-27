@@ -4,7 +4,7 @@ import type { MessageType } from '../types'
 const KEY = 'LOCALE_SWITCHER_LANGUAGE'
 
 function embedScript() {
-  const locale = window.localStorage.getItem(KEY)
+  const locale = window.sessionStorage.getItem(KEY)
   if (!locale) return
 
   const code = `
@@ -27,21 +27,24 @@ function embedScript() {
   script.remove()
 }
 
+function sendCurrentState() {
+  const locale = window.sessionStorage.getItem(KEY) || null
+  const message: MessageType = { type: 'sync', data: locale }
+  browser.runtime.sendMessage(message)
+}
+
 function handleMessage({ type, data }: MessageType) {
   switch (type) {
     case 'update':
-      if (data === window.localStorage.getItem(KEY)) break
-      if (data) window.localStorage.setItem(KEY, data)
-      else window.localStorage.removeItem(KEY)
+      if (data === window.sessionStorage.getItem(KEY)) break
+      if (data) window.sessionStorage.setItem(KEY, data)
+      else window.sessionStorage.removeItem(KEY)
       window.location.reload()
-      break
-
-    case 'get':
-      const locale = window.localStorage.getItem(KEY) || null
-      browser.runtime.sendMessage({ type: 'get', data: locale })
       break
   }
 }
 
 browser.runtime.onMessage.addListener((message) => handleMessage(message))
+
 embedScript()
+sendCurrentState()

@@ -1,27 +1,24 @@
 import browser, { WebRequest } from 'webextension-polyfill'
 import type { Locale, MessageType } from '../types'
 
-let locale: Locale = null
+let ram: Map<number, Locale> = new Map()
 
-function updateLocale(value: Locale) {
-  if (value === locale) return
-  locale = value || null
-  browser.storage.local.set({ locale })
+function updateLocale(tabId: number, value: Locale) {
+  value ||= null
+  if (value === ram.get(tabId)) return
+  ram.set(tabId, value)
+  setBadge(tabId)
+}
+
+async function getCurrentTabId() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true })
+  return tabs[0]?.id ?? null
+}
+
+async function setBadge(tabId: number) {
+  sendCurrentState(tabId)
+  const locale: Locale = ram.get(tabId) || null
   browser.browserAction.setBadgeText({ text: locale })
-}
-
-async function sendMessageToActiveTabs(message: MessageType) {
-  const active = await browser.tabs.query({ active: true, currentWindow: true })
-  for (const tab of active) {
-    if (tab.id) browser.tabs.sendMessage(tab.id, message)
-  }
-}
-
-async function getCurrentLocale() {
-  const active = await browser.tabs.query({ active: true, currentWindow: true })
-  for (const tab of active) {
-    if (tab.id) browser.tabs.sendMessage(tab.id, { type: 'get' })
-  }
 }
 
 // Intercept Accept-Language headers
@@ -32,6 +29,7 @@ if (chrome.webRequest.OnBeforeSendHeadersOptions.hasOwnProperty('EXTRA_HEADERS')
 }
 browser.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
+    const locale = ram.get(details.tabId)
     if (!locale) return
     for (const header of details.requestHeaders || []) {
       if (header.name.toLowerCase() === 'accept-language') {
@@ -46,23 +44,40 @@ browser.webRequest.onBeforeSendHeaders.addListener(
 )
 
 // Update on tab change or new urls
-browser.tabs.onActivated.addListener(() => getCurrentLocale())
-browser.tabs.onUpdated.addListener(() => getCurrentLocale())
-
-// Listener for messages from content scripts
-browser.runtime.onMessage.addListener(({ type, data }) => {
-  switch (type) {
-    case 'get':
-      updateLocale(data)
-      break
-  }
+browser.tabs.onActivated.addListener((tabId) => setBadge(tabId.tabId))
+browser.tabs.onUpdated.addListener(async () => {
+  const tabId = await getCurrentTabId()
+  if (tabId) setBadge(tabId)
 })
 
-// Listen for changes to the locale
-browser.storage.onChanged.addListener((changes) => {
-  const change = changes['locale']
-  if (change) {
-    updateLocale(change.newValue)
-    sendMessageToActiveTabs({ type: 'update', data: locale })
+function sendCurrentState(tabId: number) {
+  const locale: Locale = (tabId && ram.get(tabId)) || null
+  const msg: MessageType = { type: 'current-output', data: locale }
+  browser.runtime.sendMessage(msg)
+}
+
+// Listener for messages from content scripts
+browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
+  switch (message.type) {
+    case 'sync': {
+      const tabId = sender.tab?.id ?? null
+      if (tabId) updateLocale(tabId, message.data)
+      break
+    }
+
+    case 'update': {
+      const tabId = await getCurrentTabId()
+      if (tabId) {
+        updateLocale(tabId, message.data)
+        const msg: MessageType = { type: 'update', data: message.data }
+        browser.tabs.sendMessage(tabId, msg)
+      }
+      break
+    }
+
+    case 'current-input': {
+      const tabId = await getCurrentTabId()
+      if (tabId) sendCurrentState(tabId)
+    }
   }
 })

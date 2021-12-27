@@ -1,18 +1,29 @@
 import { writable } from 'svelte/store'
 import browser from 'webextension-polyfill'
-import type { Locale } from '../../types'
+import type { Locale, MessageType } from '../../types'
 
 export const locale = writable<Locale>(null)
 
-browser.storage.local.get('locale').then((result) => {
-  locale.set(result['locale'] || null)
+// Ask for the current locale
+const current: MessageType = { type: 'current-input', data: undefined }
+browser.runtime.sendMessage(current)
 
-  let updates = 0
-  locale.subscribe((locale) => {
-    // Skip first subscription
-    updates++
-    if (updates === 1) return
+// Listen for the current locale
+browser.runtime.onMessage.addListener((message: MessageType) => {
+  switch (message.type) {
+    case 'current-output':
+      locale.set(message.data)
+      break
+  }
+})
 
-    browser.storage.local.set({ locale })
-  })
+// Send back updates
+let updates = 0
+locale.subscribe((locale) => {
+  // Skip first subscription
+  updates++
+  if (updates === 1) return
+
+  const message: MessageType = { type: 'update', data: locale }
+  browser.runtime.sendMessage(message)
 })
