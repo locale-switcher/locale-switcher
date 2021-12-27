@@ -28,5 +28,12 @@
     "32": "icons/32.png",
     "48": "icons/48.png",
     "128": "icons/128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      }
+    }
   }
 }
