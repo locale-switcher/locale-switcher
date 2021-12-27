@@ -1,7 +1,3 @@
-/// <reference types="svelte" />
-
-declare module 'locale-emoji'
-
 interface Message {
   type: string
   data: any

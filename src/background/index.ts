@@ -1,7 +1,6 @@
 import browser, { WebRequest } from 'webextension-polyfill'
 import type { Locale, MessageType } from '../types'
 
-declare const chrome: any
 let locale: Locale = null
 
 function updateLocale(value: Locale) {
@@ -27,6 +26,7 @@ async function getCurrentLocale() {
 
 // Intercept Accept-Language headers
 const options: WebRequest.OnBeforeSendHeadersOptions[] = ['blocking', 'requestHeaders']
+// @ts-ignore
 if (chrome.webRequest.OnBeforeSendHeadersOptions.hasOwnProperty('EXTRA_HEADERS')) {
   options.push('extraHeaders')
 }
