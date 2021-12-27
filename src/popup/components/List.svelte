@@ -6,6 +6,7 @@
   import Item from './Item.svelte'
 
   let search
+  let list
   let needle = ''
   let focused = -1
 
@@ -32,6 +33,7 @@
   $: {
     needle
     focused = -1
+    if (list) list.scrollTop = 0
   }
 
   onMount(() => {
@@ -59,7 +61,7 @@
 <div class="h-100 flex flex-column">
   <div class="mb2 f6 i">Select locales:</div>
   <input on:keydown={handleKeyStroke} bind:this={search} type="text" placeholder="Search..." bind:value={needle} />
-  <div class="mt2 overflow-auto flex-grow">
+  <div class="mt2 overflow-auto flex-grow" bind:this={list}>
     {#each results as { code }, i}
       <Item {code} focused={i === focused} on:click={() => ($locale = code)} />
     {/each}
