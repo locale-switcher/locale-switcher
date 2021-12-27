@@ -4,11 +4,12 @@
   "private": true,
   "homepage": "https://github.com/locale-switcher/locale-switcher/",
   "scripts": {
+    "check": "tsc",
     "locales:download": "curl https://raw.githubusercontent.com/umpirsky/locale-list/master/data/en/locales.json | sed 's/_/-/g' > ./src/popup/lib/locales.json",
     "clean": "rm -rf dist .parcel-cache web-ext-artifacts locale-switcher.zip",
     "dev": "parcel watch --target dev --no-hmr ./manifest.json",
     "build": "parcel build --target prod ./manifest.json",
-    "dist": "run-s clean build pack:*",
+    "dist": "run-s check clean build pack:*",
     "pack:zip": "zip -r ./locale-switcher.zip dist/prod/*",
     "pack:ff": "web-ext build -s dist/prod --overwrite-dest"
   },

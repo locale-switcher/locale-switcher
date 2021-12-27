@@ -1,3 +1,5 @@
+/// <reference types="svelte" />
+
 export type Locale = string | null
 
 type Message<T extends string, D = undefined> = {
