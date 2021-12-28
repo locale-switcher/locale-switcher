@@ -25,7 +25,8 @@ for (const row of raw.slice(1)) {
     native: row[2],
   }
 }
+console.log('Found', Object.keys(locales).length, 'locales')
 
 console.log('Writing...')
-fs.writeFileSync('./src/popup/lib/locales.json', JSON.stringify(locales, null, 2))
+fs.writeFileSync('./src/popup/lib/locales.json', JSON.stringify(locales, null, 2) + '\n')
 console.log('Done')
