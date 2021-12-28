@@ -62,6 +62,10 @@
         e.preventDefault()
         $locale = filtered[focused].code
         break
+      case 'Delete':
+        e.preventDefault()
+        $locale = null
+        break
     }
   }
 </script>

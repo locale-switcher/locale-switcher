@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"
-  ><title>Enter</title><path
-    d="M176 176v-40a40 40 0 0140-40h208a40 40 0 0140 40v240a40 40 0 01-40 40H216a40 40 0 01-40-40v-40"
+  ><title>Return Down Back</title><path
     fill="none"
     stroke="currentColor"
     stroke-linecap="round"
     stroke-linejoin="round"
     stroke-width="32"
+    d="M112 352l-64-64 64-64"
   /><path
+    d="M64 288h294c58.76 0 106-49.33 106-108v-20"
     fill="none"
     stroke="currentColor"
     stroke-linecap="round"
     stroke-linejoin="round"
     stroke-width="32"
-    d="M272 336l80-80-80-80M48 256h288"
   /></svg
 >
