@@ -69,6 +69,14 @@ input[type='button'] {
   font-size: 0.8em;
 }
 
+/* Icons */
+
+svg {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+}
+
 /* HR */
 
 hr {
@@ -79,36 +87,6 @@ hr {
   opacity: 0.15;
 }
 
-/* Item */
-.item {
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-  transition: var(--transition);
-  border-radius: var(--radius);
-}
-
-.item:hover,
-.item.focused {
-  background-color: var(--bg-alt);
-}
-
-.item.selected {
-  border: 0.125em solid var(--success);
-  border-bottom-width: 0.25rem;
-  font-weight: bold;
-}
-
-/* Box */
-.box {
-  border: 0.125rem solid var(--bg-alt);
-  border-bottom-width: 0.25rem;
-  border-radius: var(--radius);
-  padding: 0.5rem;
-}
-
-/* List */
-
 /* Utility */
 
 .fill {
@@ -116,17 +94,6 @@ hr {
   height: 100%;
 }
 
-.flex-center {
-  justify-content: center;
-  align-items: center;
-}
-
 .flex-grow {
   flex: 1 0 0;
-}
-
-.crop {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

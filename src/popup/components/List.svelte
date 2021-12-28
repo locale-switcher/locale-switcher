@@ -1,9 +1,12 @@
 <script>
   import Fuse from 'fuse.js'
   import { onMount } from 'svelte'
+  import StarFilled from '../icons/StarFilled.svelte'
   import namesByLocale from '../lib/locales.json'
-  import { locale } from '../lib/store'
+  import { locale } from '../stores/locale'
+  import { Settings, star } from '../stores/settings'
   import Item from './Item.svelte'
+  import Switch from './Switch.svelte'
 
   let search
   let list
@@ -30,6 +33,7 @@
   const idx = new Fuse(items, options)
 
   $: results = needle.length > 0 ? idx.search(needle).map(({ item }) => item) : items
+  $: filtered = $Settings.showOnlyStarred ? results.filter(({ code }) => $Settings.starred.includes(code)) : results
   $: {
     needle
     focused = -1
@@ -44,25 +48,37 @@
     switch (e.key) {
       case 'ArrowUp':
         e.preventDefault()
-        focused = focused > 0 ? focused - 1 : results.length - 1
+        focused = focused > 0 ? focused - 1 : filtered.length - 1
         break
       case 'ArrowDown':
         e.preventDefault()
-        focused = focused === results.length - 1 ? 0 : focused + 1
+        focused = focused === filtered.length - 1 ? 0 : focused + 1
+        break
+      case 'ArrowRight':
+        e.preventDefault()
+        star(filtered[focused].code)
         break
       case 'Enter':
         e.preventDefault()
-        $locale = results[focused].code
+        $locale = filtered[focused].code
         break
     }
   }
 </script>
 
 <div class="h-100 flex flex-column">
-  <div class="mb2 f6 i">Select locales:</div>
+  <div class="flex items-end mb2">
+    <div class="f6 i">Select locales:</div>
+    <div class="flex-grow" />
+    <div class="flex pr2 mr1 items-center">
+      <Switch bind:value={$Settings.showOnlyStarred} />
+      <div class="ml1" />
+      <StarFilled />
+    </div>
+  </div>
   <input on:keydown={handleKeyStroke} bind:this={search} type="text" placeholder="Search..." bind:value={needle} />
   <div class="mt2 overflow-auto flex-grow" bind:this={list}>
-    {#each results as { code }, i}
+    {#each filtered as { code }, i}
       <Item {code} focused={i === focused} on:click={() => ($locale = code)} />
     {/each}
   </div>
