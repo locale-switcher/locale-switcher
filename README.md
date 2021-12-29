@@ -34,7 +34,7 @@ When a locale chosen the following thinks will be adjusted:
 
 ## Acknowledgements
 
-The data for the locales is scraped automatically from [Locale Plante](https://www.localeplanet.com/icu/index.html).
+The data for the locales is scraped automatically from [LocalePlantet](https://www.localeplanet.com/icu/index.html).
 
 ## License
 
