@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./icons/128.png" alt="logo" />
+  <img src="./icons/256.png" alt="logo" />
 </p>
 
 # 🌏 Locale Switcher
