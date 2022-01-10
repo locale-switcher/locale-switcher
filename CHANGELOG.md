@@ -14,4 +14,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - Locales are scoped to a single tab now.
-- New Look & Feel.
+- New look and feel.
