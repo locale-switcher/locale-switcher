@@ -1,0 +1,132 @@
+/* General */
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* https://coolors.co/202020-f7f8f1-d9ddc4-4b88a2-ea9010 */
+  --text: #202020;
+  --bg: #f7f8f1;
+  --bg-alt: #d9ddc4;
+  --success: #4b88a2;
+  --error: #ea9010;
+  --radius: 0.2rem;
+  --transition: all 250ms ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  height: 35rem;
+  width: 20rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  font-size: 16px;
+
+  background-color: none;
+}
+
+main {
+  padding: 1rem;
+  overflow: auto;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
+}
+
+/* Input */
+
+input {
+  appearance: none;
+  border: 0.125rem solid var(--bg-alt);
+  border-bottom-width: 0.25rem;
+  border-radius: var(--radius);
+  outline: none;
+  font-size: 1rem;
+  font-weight: inherit;
+  font-style: inherit;
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+  background-color: transparent;
+  transition: var(--transition);
+}
+
+input:focus,
+input:hover,
+:active {
+  outline: none;
+  border-color: var(--text);
+}
+
+input[type='button'] {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+/* HR */
+
+hr {
+  border: none;
+  outline: none;
+  margin: 0.75rem 0;
+  border-bottom: 0.125rem solid var(--text);
+  opacity: 0.15;
+}
+
+/* Item */
+.item {
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: var(--radius);
+}
+
+.item:hover,
+.item.focused {
+  background-color: var(--bg-alt);
+}
+
+.item.selected {
+  border: 0.125em solid var(--success);
+  border-bottom-width: 0.25rem;
+  font-weight: bold;
+}
+
+/* Box */
+.box {
+  border: 0.125rem solid var(--bg-alt);
+  border-bottom-width: 0.25rem;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+}
+
+/* List */
+
+/* Utility */
+
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-grow {
+  flex: 1 0 0;
+}
+
+.crop {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
