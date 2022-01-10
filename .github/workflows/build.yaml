@@ -15,8 +15,8 @@ jobs:
       - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: PDFs
-          path: "*.pdf"
+          name: Extension
+          path: web-ext-artifacts/*.zip
       - name: Sign
         uses: tristan-weil/ghaction-checksum-sign-artifact@v1.0.1
         with:
