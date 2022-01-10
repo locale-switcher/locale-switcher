@@ -7,6 +7,11 @@
 
 Browser Extension to quickly change your browser locale.
 
+## 🔗 Download
+
+- [**Chrome**](https://chrome.google.com/webstore/detail/locale-switcher/kngfjpghaokedippaapkfihdlmmlafcc)
+- [**Firefox**](https://addons.mozilla.org/en-US/firefox/addon/locale-switcher/)
+
 ## ❓ What does it do?
 
 When a locale chosen the following thinks will be adjusted:
