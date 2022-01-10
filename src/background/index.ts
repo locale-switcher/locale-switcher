@@ -52,30 +52,30 @@ browser.tabs.onUpdated.addListener(async () => {
 
 function sendCurrentState(tabId: number) {
   const locale: Locale = (tabId && ram.get(tabId)) || null
-  const msg: MessageType = { type: 'current-output', data: locale }
+  const msg: MessageType = { type: 'setPopupLocale', data: locale }
   browser.runtime.sendMessage(msg)
 }
 
 // Listener for messages from content scripts
 browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
   switch (message.type) {
-    case 'sync': {
+    case 'setBackgroundLocaleFromTab': {
       const tabId = sender.tab?.id ?? null
       if (tabId) updateLocale(tabId, message.data)
       break
     }
 
-    case 'update': {
+    case 'setBackgroundLocaleFromPopup': {
       const tabId = await getCurrentTabId()
       if (tabId) {
         updateLocale(tabId, message.data)
-        const msg: MessageType = { type: 'update', data: message.data }
+        const msg: MessageType = { type: 'setBackgroundLocaleFromPopup', data: message.data }
         browser.tabs.sendMessage(tabId, msg)
       }
       break
     }
 
-    case 'current-input': {
+    case 'getBackgroundLocale': {
       const tabId = await getCurrentTabId()
       if (tabId) sendCurrentState(tabId)
     }

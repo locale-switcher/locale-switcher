@@ -5,13 +5,13 @@ import type { Locale, MessageType } from '../../types'
 export const locale = writable<Locale>(null)
 
 // Ask for the current locale
-const current: MessageType = { type: 'current-input', data: undefined }
+const current: MessageType = { type: 'getBackgroundLocale', data: undefined }
 browser.runtime.sendMessage(current)
 
 // Listen for the current locale
 browser.runtime.onMessage.addListener((message: MessageType) => {
   switch (message.type) {
-    case 'current-output':
+    case 'setPopupLocale':
       locale.set(message.data)
       break
   }
@@ -24,6 +24,6 @@ locale.subscribe((locale) => {
   updates++
   if (updates === 1) return
 
-  const message: MessageType = { type: 'update', data: locale }
+  const message: MessageType = { type: 'setBackgroundLocaleFromPopup', data: locale }
   browser.runtime.sendMessage(message)
 })

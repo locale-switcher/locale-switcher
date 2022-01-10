@@ -7,9 +7,9 @@ type Message<T extends string, D = undefined> = {
   data: D
 }
 
-export type MessageUpdate = Message<'update', Locale>
-export type MessageSync = Message<'sync', Locale>
-export type MessageCurrentInput = Message<'current-input'>
-export type MessageCurrentOutput = Message<'current-output', Locale>
+export type MessageUpdate = Message<'setBackgroundLocaleFromPopup', Locale>
+export type MessageSync = Message<'setBackgroundLocaleFromTab', Locale>
+export type MessageCurrentInput = Message<'getBackgroundLocale'>
+export type MessageCurrentOutput = Message<'setPopupLocale', Locale>
 
 export type MessageType = MessageUpdate | MessageSync | MessageCurrentInput | MessageCurrentOutput
