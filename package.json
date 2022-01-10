@@ -6,12 +6,11 @@
   "scripts": {
     "check": "tsc",
     "locales:download": "node scripts/download-locales.mjs",
-    "clean": "rm -rf dist .parcel-cache web-ext-artifacts locale-switcher.zip",
+    "clean": "rm -rf dist .parcel-cache web-ext-artifacts",
     "dev": "parcel watch --target dev --no-hmr ./manifest.json",
     "build": "parcel build --target prod ./manifest.json",
-    "dist": "run-s check clean build pack:*",
-    "pack:zip": "zip -r ./locale-switcher.zip dist/prod/*",
-    "pack:ff": "web-ext build -s dist/prod --overwrite-dest"
+    "pack": "web-ext build -s dist/prod --overwrite-dest",
+    "dist": "run-s check clean build pack"
   },
   "targets": {
     "dev": {
