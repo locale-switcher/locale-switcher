@@ -2,7 +2,7 @@
   import Fuse from 'fuse.js'
   import { onMount } from 'svelte'
   import StarFilled from '../icons/StarFilled.svelte'
-  import namesByLocale from '../lib/locales.json'
+  import locales from '../lib/locales.json'
   import { locale } from '../stores/locale'
   import { Settings, star } from '../stores/settings'
   import Item from './Item.svelte'
@@ -13,9 +13,10 @@
   let needle = ''
   let focused = -1
 
-  const items = Object.entries(namesByLocale).map(([code, name]) => ({
+  const items = Object.entries(locales).map(([code, { name, native }]) => ({
     code,
     name,
+    native,
   }))
   const options = {
     id: 'code',
@@ -26,8 +27,9 @@
     maxPatternLength: 32,
     minMatchCharLength: 1,
     keys: [
-      { name: 'code', weight: 0.3 },
-      { name: 'name', weight: 0.7 },
+      { name: 'code', weight: 0.5 },
+      { name: 'name', weight: 1 },
+      { name: 'native', weight: 0.25 },
     ],
   }
   const idx = new Fuse(items, options)
