@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0]
 
+## Added
+
+- Starring languages and filtering for them.
+
 ## Changed
 
-- per tab locales
-- new design
+- Locales are scoped to a single tab now.
+- New look and feel.

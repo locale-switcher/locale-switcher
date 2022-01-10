@@ -1,5 +1,5 @@
 <script>
-  import { locale } from '../lib/store'
+  import { locale } from '../stores/locale'
   import Item from './Item.svelte'
 </script>
 
@@ -12,3 +12,12 @@
     <input class="mt2" type="button" value="Clear" on:click={() => ($locale = null)} />
   {/if}
 </div>
+
+<style>
+  .box {
+    border: 0.125rem solid var(--bg-alt);
+    border-bottom-width: 0.25rem;
+    border-radius: var(--radius);
+    padding: 0.5rem;
+  }
+</style>
