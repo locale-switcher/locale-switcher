@@ -12,12 +12,17 @@ jobs:
       - run: npm -g i pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run dist
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDFs
+          path: "*.pdf"
       - name: Sign
         uses: tristan-weil/ghaction-checksum-sign-artifact@v1.0.1
         with:
-          path: /**/*.zip
+          path: web-ext-artifacts/*.zip
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: /**/*.zip
+          files: web-ext-artifacts/*.zip
