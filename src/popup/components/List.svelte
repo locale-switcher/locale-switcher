@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import StarFilled from '../icons/StarFilled.svelte'
   import locales from '../lib/locales.json'
-  import { locale } from '../lib/store'
+  import { locale } from '../stores/locale'
   import { Settings, star } from '../stores/settings'
   import Item from './Item.svelte'
   import Switch from './Switch.svelte'
