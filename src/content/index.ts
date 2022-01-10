@@ -29,13 +29,13 @@ function embedScript() {
 
 function sendCurrentState() {
   const locale = window.sessionStorage.getItem(KEY) || null
-  const message: MessageType = { type: 'sync', data: locale }
+  const message: MessageType = { type: 'setBackgroundLocaleFromTab', data: locale }
   browser.runtime.sendMessage(message)
 }
 
 function handleMessage({ type, data }: MessageType) {
   switch (type) {
-    case 'update':
+    case 'setBackgroundLocaleFromPopup':
       if (data === window.sessionStorage.getItem(KEY)) break
       if (data) window.sessionStorage.setItem(KEY, data)
       else window.sessionStorage.removeItem(KEY)
