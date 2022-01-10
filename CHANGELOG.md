@@ -17,3 +17,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Locales are scoped to a single tab now.
 - New look and feel.
+- Rewrite in Svelte and Typescript
