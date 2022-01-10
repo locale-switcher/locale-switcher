@@ -19,8 +19,8 @@ When a locale chosen the following thinks will be adjusted:
 - Chrome & Firefox
 - Support for 700+ languages and variations
 - Per tab basis
-- Favorize your most used locales
-- Fully shortcut enabled, no mouse needed
+- Favorite your most used locales
+- Fully shortcut enabled, no mouse needed (_Windows_: Ctrl+Shift+L / _Mac_: Cmd+Shift+L)
 
 ## 🔐 Permissions
 
@@ -34,23 +34,8 @@ When a locale chosen the following thinks will be adjusted:
 
 ## Acknowledgements
 
-The data for the locales is scraped automatically from [LocalePlantet](https://www.localeplanet.com/icu/index.html).
+The data for the locales is scraped automatically from [Locale Planet](https://www.localeplanet.com/icu/index.html).
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-### Software used in this project
-
-```bash
-# Generated with:
-npm exec license-checker --summary
-```
-
-```
-├─ MIT: 27
-├─ MPL-2.0: 3
-├─ Apache-2.0: 3
-├─ BSD-2-Clause: 1
-└─ CC0-1.0: 1
-```
