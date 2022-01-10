@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 
 - Starring languages and filtering for them.
+- Support for more languages.
+- Shortcuts for keyboard only interaction
 
 ## Changed
 
