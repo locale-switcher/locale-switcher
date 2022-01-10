@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="./icons/256.png" alt="logo" />
+  <img src="https://github.com/locale-switcher/design/raw/main/assets/store/Store%20Image.png" alt="logo" />
 </p>
+<br/>
 
 # 🌏 Locale Switcher
 
