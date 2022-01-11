@@ -20,9 +20,12 @@ rows.forEach((el) => {
 
 const locales = {}
 for (const row of raw.slice(1)) {
-  locales[row[0]] = {
-    name: row[1],
-    native: row[2],
+  const code = row[0].replace(/_/g, '-')
+  const name = row[1]
+  const native = row[2]
+  locales[code] = {
+    name,
+    native,
   }
 }
 console.log('Found', Object.keys(locales).length, 'locales')
