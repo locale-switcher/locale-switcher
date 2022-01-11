@@ -34,7 +34,10 @@ browser.webRequest.onBeforeSendHeaders.addListener(
     if (!locale) return
     for (const header of details.requestHeaders || []) {
       if (header.name.toLowerCase() === 'accept-language') {
-        header.value = LocaleList.parse(locale).join(', ')
+        header.value = LocaleList.parse(locale)
+          // Add quality score https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language#directives
+          .map((l, i) => (i === 0 ? l : `${l};q=0.${Math.max(10 - i, 1)}`))
+          .join(', ')
         break
       }
     }

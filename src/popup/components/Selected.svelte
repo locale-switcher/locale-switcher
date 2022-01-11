@@ -11,6 +11,7 @@
   let list
   $: selected = $locale ? $locale.split(',') : []
 
+  // When languages are dragged, save the new order the locale
   function onUpdate(e) {
     const locales = LocaleList.parse($locale)
     const item = locales[e.oldDraggableIndex]
