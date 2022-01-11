@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Locale Switcher",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Lets you quickly switch the browser locale to test localization on your website.",
   "permissions": ["storage", "webRequest", "webRequestBlocking", "<all_urls>"],
   "minimum_chrome_version": "72",

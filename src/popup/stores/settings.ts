@@ -1,15 +1,18 @@
 import { derived, writable } from 'svelte/store'
 import Browser from 'webextension-polyfill'
+import { toggleInArray } from '../../shared/utils'
 import { Locale } from '../../types'
 
 export type Settings = {
   starred: string[]
   showOnlyStarred: boolean
+  multiple: boolean
 }
 
 const initial: Settings = {
   starred: [],
   showOnlyStarred: false,
+  multiple: false,
 }
 
 export const Settings = writable<Settings>(initial)
@@ -29,7 +32,7 @@ export const isStarred = derived(Settings, (s) => (code: Locale) => code && s.st
 
 export function star(code: string) {
   Settings.update((s) => {
-    s.starred = s.starred.includes(code) ? s.starred.filter((c) => c !== code) : [...s.starred, code]
+    s.starred = toggleInArray(s.starred, code)
     return s
   })
 }

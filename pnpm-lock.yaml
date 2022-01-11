@@ -12,6 +12,7 @@ specifiers:
   npm-run-all: ^4.1.5
   parcel: ^2.0.1
   parcel-transformer-svelte: ^1.2.3
+  sortablejs: ^1.14.0
   svelte: ^3.44.3
   svelte-preprocess: ^4.10.1
   tachyons: ^4.12.0
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   fuse.js: 6.4.6
   locale-emoji: 0.3.0
+  sortablejs: 1.14.0
   tachyons: 4.12.0
   webextension-polyfill: 0.8.0
 
@@ -5962,6 +5964,10 @@ packages:
       sander: 0.5.1
       sourcemap-codec: 1.4.8
     dev: true
+
+  /sortablejs/1.14.0:
+    resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
+    dev: false
 
   /source-map-js/0.6.2:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}

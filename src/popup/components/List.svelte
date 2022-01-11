@@ -85,7 +85,7 @@
   <input on:keydown={handleKeyStroke} bind:this={search} type="text" placeholder="Search..." bind:value={needle} />
   <div class="mt2 overflow-auto flex-grow" bind:this={list}>
     {#each filtered as { code }, i}
-      <Item {code} focused={i === focused} on:click={() => ($locale = code)} />
+      <Item {code} focused={i === focused} />
     {/each}
   </div>
 </div>
