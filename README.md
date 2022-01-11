@@ -5,6 +5,12 @@
 
 # 🌏 Locale Switcher
 
+![chrome users](https://img.shields.io/chrome-web-store/users/kngfjpghaokedippaapkfihdlmmlafcc?label=chrome)
+![chrome rating](https://img.shields.io/chrome-web-store/rating/kngfjpghaokedippaapkfihdlmmlafcc?label=chrome)
+![firefox users](https://img.shields.io/amo/users/locale-switcher?label=firefox)
+![firefox rating](https://img.shields.io/amo/rating/locale-switcher?label=firerox)
+![version](https://img.shields.io/github/v/release/locale-switcher/locale-switcher?label=version&sort=semver)
+
 Browser Extension to quickly change your browser locale.
 
 ## 🔗 Download
