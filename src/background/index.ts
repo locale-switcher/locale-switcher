@@ -1,4 +1,5 @@
 import browser, { WebRequest } from 'webextension-polyfill'
+import { LocaleList } from '../shared/utils'
 import type { Locale, MessageType } from '../types'
 
 let ram: Map<number, Locale> = new Map()
@@ -33,7 +34,7 @@ browser.webRequest.onBeforeSendHeaders.addListener(
     if (!locale) return
     for (const header of details.requestHeaders || []) {
       if (header.name.toLowerCase() === 'accept-language') {
-        header.value = locale
+        header.value = LocaleList.parse(locale).join(', ')
         break
       }
     }
