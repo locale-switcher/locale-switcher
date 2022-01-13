@@ -32,7 +32,7 @@ When a locale chosen the following thinks will be adjusted:
 - Support for 700+ languages and variations
 - Per tab basis
 - Favorite your most used locales
-- Fully shortcut enabled, no mouse needed (_Windows_: Ctrl+Shift+L / _Mac_: Cmd+Shift+L)
+- Fully shortcut enabled, no mouse needed (_Windows_: <kbd>Ctrl + Shift + L</kbd> / _Mac_: <kbd>Cmd + Shift + L</kbd>)
 
 ## 🔐 Permissions
 
