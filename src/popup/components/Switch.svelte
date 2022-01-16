@@ -10,7 +10,6 @@
 <style>
   label {
     --p: 0.25em;
-    --t: 300ms ease;
     position: relative;
     display: inline-block;
     width: 2.5em;
@@ -28,7 +27,7 @@
     height: 100%;
     background-color: var(--bg-alt);
     border-radius: var(--radius);
-    transition: var(--t);
+    transition: var(--transition);
   }
 
   span:before {
@@ -40,7 +39,7 @@
     top: var(--p);
     border-radius: var(--radius);
     background-color: white;
-    transition: var(--t);
+    transition: var(--transition);
   }
 
   input:checked + span {

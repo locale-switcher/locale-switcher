@@ -6,6 +6,7 @@
   import { locale } from '../stores/locale'
   import { Settings } from '../stores/settings'
   import Item from './Item.svelte'
+  import Row from './Row.svelte'
   import Switch from './Switch.svelte'
 
   let list
@@ -26,15 +27,14 @@
 </script>
 
 <div>
-  <div class="flex items-end mb2">
+  <Row>
     <div class="f6 i">Currently active:</div>
-    <div class="flex-grow" />
     <div class="flex pr2 mr1 items-center">
       <Switch bind:value={$Settings.multiple} />
       <div class="ml1" />
       <Multiple />
     </div>
-  </div>
+  </Row>
 
   <div bind:this={list}>
     {#each selected as item (item)}

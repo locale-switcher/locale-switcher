@@ -7,12 +7,16 @@ export type Settings = {
   starred: string[]
   showOnlyStarred: boolean
   multiple: boolean
+  global: boolean
+  persist: boolean
 }
 
 const initial: Settings = {
   starred: [],
   showOnlyStarred: false,
   multiple: false,
+  global: false,
+  persist: false,
 }
 
 export const Settings = writable<Settings>(initial)
