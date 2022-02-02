@@ -1,11 +1,20 @@
 import browser from 'webextension-polyfill'
 import { LocaleList } from '../shared/utils'
-import type { MessageType } from '../types'
+import type { Locale, MessageType } from '../types'
 
 const KEY = 'LOCALE_SWITCHER_LANGUAGE'
 
+function current(): Locale {
+  return window.sessionStorage.getItem(KEY) || window.localStorage.getItem(KEY)
+}
+
+function clear() {
+  window.sessionStorage.removeItem(KEY)
+  window.localStorage.removeItem(KEY)
+}
+
 function embedScript() {
-  const locale = window.sessionStorage.getItem(KEY)
+  const locale = current()
   if (!locale) return
 
   const locales = LocaleList.parse(locale)
@@ -31,18 +40,22 @@ function embedScript() {
 }
 
 function sendCurrentState() {
-  const locale = window.sessionStorage.getItem(KEY) || null
+  const locale = current()
   const message: MessageType = { type: 'setBackgroundLocaleFromTab', data: locale }
   browser.runtime.sendMessage(message)
 }
 
-function handleMessage({ type, data }: MessageType) {
-  switch (type) {
-    case 'setBackgroundLocaleFromPopup':
-      if (data === window.sessionStorage.getItem(KEY)) break
-      if (data) window.sessionStorage.setItem(KEY, data)
-      else window.sessionStorage.removeItem(KEY)
-      window.location.reload()
+function handleMessage(message: MessageType) {
+  switch (message.type) {
+    case 'setTabLocaleFromBackground':
+      const locale = current()
+      if (message.data.locale === locale) break
+      clear()
+      if (message.data.locale) {
+        const storage = message.data.type === 'session' ? window.sessionStorage : window.localStorage
+        storage.setItem(KEY, message.data.locale)
+      }
+      if (window.document.visibilityState === 'visible') window.location.reload()
       break
   }
 }

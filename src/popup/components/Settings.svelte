@@ -34,15 +34,17 @@
       <p class="ma0">Apply locales to all tabs.</p>
 
       <div class="mb4" />
-      <Row>
-        <div class="f6 i">Persist:</div>
-        <div class="flex items-center">
-          <Switch bind:value={$Settings.persist} />
-          <div class="ml1" />
-          <Save />
-        </div>
-      </Row>
-      <p class="ma0">Persist locale across sessions.</p>
+      <div class:disabled={$Settings.global}>
+        <Row>
+          <div class="f6 i">Persist:</div>
+          <div class="flex items-center">
+            <Switch bind:value={$Settings.persist} disabled={$Settings.global} />
+            <div class="ml1" />
+            <Save />
+          </div>
+        </Row>
+        <p class="ma0">Persist locale across sessions.</p>
+      </div>
     </div>
   </section>
 {/if}
@@ -60,5 +62,10 @@
   .close :global(svg) {
     font-size: 1.5rem;
     cursor: pointer;
+  }
+
+  div.disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
   }
 </style>

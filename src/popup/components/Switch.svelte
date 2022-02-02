@@ -3,7 +3,7 @@
 </script>
 
 <label>
-  <input type="checkbox" bind:checked={value} />
+  <input {...$$restProps} type="checkbox" bind:checked={value} />
   <span />
 </label>
 
