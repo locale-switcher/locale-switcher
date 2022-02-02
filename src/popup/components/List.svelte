@@ -6,6 +6,7 @@
   import { locale } from '../stores/locale'
   import { Settings, star } from '../stores/settings'
   import Item from './Item.svelte'
+  import Row from './Row.svelte'
   import Switch from './Switch.svelte'
 
   let search
@@ -73,15 +74,14 @@
 </script>
 
 <div class="h-100 flex flex-column">
-  <div class="flex items-end mb2">
+  <Row>
     <div class="f6 i">Select locales:</div>
-    <div class="flex-grow" />
     <div class="flex pr2 mr1 items-center">
       <Switch bind:value={$Settings.showOnlyStarred} />
       <div class="ml1" />
       <StarFilled />
     </div>
-  </div>
+  </Row>
   <input on:keydown={handleKeyStroke} bind:this={search} type="text" placeholder="Search..." bind:value={needle} />
   <div class="mt2 overflow-auto flex-grow" bind:this={list}>
     {#each filtered as { code }, i}

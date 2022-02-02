@@ -5,8 +5,11 @@ import type { Locale, MessageType } from '../../types'
 export const locale = writable<Locale>(null)
 
 // Ask for the current locale
-const current: MessageType = { type: 'getBackgroundLocale', data: undefined }
-browser.runtime.sendMessage(current)
+export function update() {
+  const current: MessageType = { type: 'getBackgroundLocale', data: undefined }
+  browser.runtime.sendMessage(current)
+}
+update()
 
 // Listen for the current locale
 browser.runtime.onMessage.addListener((message: MessageType) => {

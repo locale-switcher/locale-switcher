@@ -3,17 +3,34 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  transition: var(--transition);
 }
 
 :root {
   /* https://coolors.co/202020-f7f8f1-d9ddc4-4b88a2-ea9010 */
   --text: #202020;
-  --bg: #f7f8f1;
+  --bg: #fbfcf8;
   --bg-alt: #d9ddc4;
   --success: #4b88a2;
   --error: #ea9010;
   --radius: 0.2rem;
   --transition: all 250ms ease;
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    transition: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f7f8f1;
+    --bg: #0a0a0a;
+    --bg-alt: #2d2d2d;
+    --success: #4b88a2;
+    --error: #ea9010;
+  }
 }
 
 body {
@@ -35,13 +52,13 @@ main {
   overflow: auto;
   background-color: var(--bg);
   color: var(--text);
-  border: 0.1rem solid var(--text);
-  border-radius: 0.5rem;
+  position: relative;
 }
 
 /* Input */
 
 input {
+  color: inherit;
   appearance: none;
   border: 0.125rem solid var(--bg-alt);
   border-bottom-width: 0.25rem;
@@ -75,6 +92,7 @@ svg {
   height: 1em;
   width: auto;
   vertical-align: middle;
+  fill: currentColor;
 }
 
 /* HR */
@@ -96,4 +114,8 @@ hr {
 
 .flex-grow {
   flex: 1 0 0;
+}
+
+a {
+  color: inherit;
 }

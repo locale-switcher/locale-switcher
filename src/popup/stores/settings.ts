@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store'
-import Browser from 'webextension-polyfill'
+import { get, set } from '../../shared/settings'
 import { toggleInArray } from '../../shared/utils'
 import { Locale } from '../../types'
 
@@ -7,24 +7,30 @@ export type Settings = {
   starred: string[]
   showOnlyStarred: boolean
   multiple: boolean
+  global: boolean
+  globalLocale: Locale
+  persist: boolean
 }
 
 const initial: Settings = {
   starred: [],
   showOnlyStarred: false,
   multiple: false,
+  global: false,
+  globalLocale: null as Locale,
+  persist: true,
 }
 
 export const Settings = writable<Settings>(initial)
 
-Browser.storage.local.get().then((data) => {
+get().then((data) => {
   Settings.set({
     ...initial,
     ...data,
   })
 
   Settings.subscribe((s) => {
-    Browser.storage.local.set(s)
+    set(s)
   })
 })
 

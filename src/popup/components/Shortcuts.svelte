@@ -19,26 +19,37 @@
     {/if}
   </div>
 
-  {#if expanded}
-    <div class="shortcuts flex items-start mt2 code">
-      <div>
-        <ArrowUp />
-        <span>Up</span>
-        <br />
-        <ArrowDown />
-        <span>Down</span>
-        <br />
-        <ArrowRight />
-        <span>Star</span>
-      </div>
-      <div class="ml3" />
-      <div>
-        <Enter />
-        <span>Select</span>
-        <br />
-        <Backspace />
-        <span>Reset</span>
-      </div>
+  <div class:expanded class="shortcuts flex items-start  code">
+    <div>
+      <ArrowUp />
+      <kbd>Up</kbd>
+      <br />
+      <ArrowDown />
+      <kbd>Down</kbd>
+      <br />
+      <ArrowRight />
+      <kbd>Star</kbd>
     </div>
-  {/if}
+    <div class="ml3" />
+    <div>
+      <Enter />
+      <kbd>Select</kbd>
+      <br />
+      <Backspace />
+      <kbd>Reset</kbd>
+    </div>
+  </div>
 </div>
+
+<style>
+  .shortcuts {
+    height: 0;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .shortcuts.expanded {
+    height: 2.75rem;
+    margin-top: 0.5rem;
+  }
+</style>
