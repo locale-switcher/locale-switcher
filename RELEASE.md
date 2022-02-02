@@ -1,14 +1,12 @@
 # Release
 
-## Building
+## Building Locally
 
-1. Bump version in `manifest.json` and `src/dashboard/components/Footer.svelte`
-2. Build with `pnpm run dist`
+1. Bump version in `manifest.json`.
+2. Build with `pnpm run dist`.
 
-## Firefox
+## Building in the CI
 
-Upload `web-ext-artifacts/locale-switcher-*.zip` in the [console](https://addons.mozilla.org/de/developers/).
-
-## Chrome
-
-Upload `locale-switcher.zip` in the [console](https://chrome.google.com/webstore/devconsole/)
+1. Create a new release in Github.
+2. Github Actions will build and upload the zip file to the release.
+3. Upload to the stores
