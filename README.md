@@ -33,6 +33,7 @@ When a locale chosen the following thinks will be adjusted:
 - Per tab basis
 - Favorite your most used locales
 - Fully shortcut enabled, no mouse needed (_Windows_: <kbd>Ctrl + Shift + L</kbd> / _Mac_: <kbd>Cmd + Shift + L</kbd>)
+- Dark mode
 
 ## 🔐 Permissions
 
