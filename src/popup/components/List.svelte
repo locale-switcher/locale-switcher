@@ -33,9 +33,10 @@
       { name: 'native', weight: 0.25 },
     ],
   }
-  const idx = new Fuse(items, options)
 
-  $: results = needle.length > 0 ? idx.search(needle).map(({ item }) => item) : items
+  $: sorted = items.sort((a, b) => a.code.localeCompare(b.code))
+  $: idx = new Fuse(sorted, options)
+  $: results = needle.length > 0 ? idx.search(needle).map(({ item }) => item) : sorted
   $: filtered = $Settings.showOnlyStarred ? results.filter(({ code }) => $Settings.starred.includes(code)) : results
   $: {
     needle
