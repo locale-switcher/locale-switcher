@@ -2,6 +2,7 @@ import axios from 'axios'
 import { JSDOM } from 'jsdom'
 import fs from 'fs'
 
+// Download the locales from locale planet
 console.log('Downloading...')
 const { data: html } = await axios({
   url: 'https://www.localeplanet.com/icu/index.html',
@@ -9,6 +10,7 @@ const { data: html } = await axios({
 })
 const dom = new JSDOM(html)
 
+// Extract data from html
 console.log('Parsing...')
 const raw = []
 const rows = dom.window.document.querySelectorAll('table tr')
@@ -19,6 +21,14 @@ rows.forEach((el) => {
 })
 
 const locales = {}
+
+// Manual additions
+locales['zh-CN'] = {
+  name: 'Chinese (China)',
+  native: '中文(中国)',
+}
+
+// From generated data
 for (const row of raw.slice(1)) {
   const code = row[0].replace(/_/g, '-')
   const name = row[1]
