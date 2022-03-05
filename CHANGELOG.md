@@ -5,23 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2]
+
+### Fixed
+
+- Remove source maps from prod build.
+
+### Security
+
+- Updated dependencies.
+
 ## [1.2.1]
 
 ### Added
 
-- `zh-CH` Chinese locale for China region
+- `zh-CH` Chinese locale for China region.
 
 ### Security
 
-- Updated dependencies
+- Updated dependencies.
 
 ## [1.2.0]
 
 ### Added
 
-- Support for global language
-- Support for persistent language selection for a domain. [enabled by default now]
-- Dark mode
+- Support for global language.
+- Support for persistent language selection for a domain. [enabled by default now].
+- Dark mode.
 
 ### Security
 
@@ -45,10 +55,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Starring languages and filtering for them.
 - Support for more languages.
-- Shortcuts for keyboard only interaction
+- Shortcuts for keyboard only interaction.
 
 ## Changed
 
 - Locales are scoped to a single tab now.
 - New look and feel.
-- Rewrite in Svelte and Typescript
+- Rewrite in Svelte and Typescript.
