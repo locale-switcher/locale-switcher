@@ -28,6 +28,12 @@ locales['zh-CN'] = {
   native: '中文(中国)',
 }
 
+// Manual additions
+locales['zh-TW'] = {
+  name: 'Chinese (Traditional, Taiwan)',
+  native: '中文（繁體，台灣）',
+}
+
 // From generated data
 for (const row of raw.slice(1)) {
   const code = row[0].replace(/_/g, '-')
