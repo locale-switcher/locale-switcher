@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { JSDOM } from 'jsdom'
 import fs from 'fs'
+import { JSDOM } from 'jsdom'
 
 // Download the locales from locale planet
 console.log('Downloading...')
