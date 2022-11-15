@@ -6,20 +6,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "16"
-      - run: npm -g i pnpm
+          node-version: 16
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm run dist
+
       - name: Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Extension
           path: web-ext-artifacts/*.zip
       - name: Sign
-        uses: tristan-weil/ghaction-checksum-sign-artifact@v1.0.1
+        uses: tristan-weil/ghaction-checksum-sign-artifact@v1
         with:
           path: web-ext-artifacts/*.zip
       - name: Release
