@@ -12,6 +12,7 @@ specifiers:
   parcel: ^2.8.0
   parcel-transformer-svelte: ^1.2.3
   postcss: ^8.4.19
+  shx: ^0.3.4
   sortablejs: ^1.15.0
   svelte: ^3.53.1
   svelte-preprocess: ^4.10.7
@@ -37,6 +38,7 @@ devDependencies:
   parcel: 2.8.0_postcss@8.4.19
   parcel-transformer-svelte: 1.2.3_k4dvdrnl7fdsu5zuuv4hxugc3m
   postcss: 8.4.19
+  shx: 0.3.4
   svelte: 3.53.1
   svelte-preprocess: 4.10.7_j5pxud3sqxrswhsagm6naoo5gu
   typescript: 4.8.4
@@ -2953,6 +2955,11 @@ packages:
       side-channel: 1.0.4
     dev: true
 
+  /interpret/1.4.0:
+    resolution: {integrity: sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==}
+    engines: {node: '>= 0.10'}
+    dev: true
+
   /invert-kv/3.0.1:
     resolution: {integrity: sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==}
     engines: {node: '>=8'}
@@ -4399,6 +4406,13 @@ packages:
     engines: {node: '>= 12.13.0'}
     dev: true
 
+  /rechoir/0.6.2:
+    resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      resolve: 1.22.1
+    dev: true
+
   /regenerator-runtime/0.13.10:
     resolution: {integrity: sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==}
     dev: true
@@ -4654,8 +4668,27 @@ packages:
     resolution: {integrity: sha512-8o/QEhSSRb1a5i7TFR0iM4G16Z0vYB2OQVs4G3aAFXjn3T6yEx8AZxy1PgDF7I00LZHYA3WxaSYIf5e5sAX8Rw==}
     dev: true
 
+  /shelljs/0.8.5:
+    resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
+    engines: {node: '>=4'}
+    hasBin: true
+    dependencies:
+      glob: 7.2.3
+      interpret: 1.4.0
+      rechoir: 0.6.2
+    dev: true
+
   /shellwords/0.1.1:
     resolution: {integrity: sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==}
+    dev: true
+
+  /shx/0.3.4:
+    resolution: {integrity: sha512-N6A9MLVqjxZYcVn8hLmtneQWIJtp8IKzMP4eMnx+nqkvXoqinUPCbUFLp2UcWTEIUONhlk0ewxr/jaVGlc+J+g==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.7
+      shelljs: 0.8.5
     dev: true
 
   /side-channel/1.0.4:
