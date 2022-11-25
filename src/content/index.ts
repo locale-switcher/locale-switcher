@@ -18,7 +18,7 @@ function embedScript() {
   if (!locale) return
 
   const locales = LocaleList.parse(locale)
-  const asString = `[${locales.map((l) => `"${l}"`).join(', ')}]`
+  const asString = JSON.stringify(locales)
   const code = `
     (() => {
       Object.defineProperties(window.navigator.__proto__, {
