@@ -1,8 +1,18 @@
 import { Locale } from '../types'
 
 export class LocaleList {
+  // RegExp for 1 to 3 level language codes. Examples: en, en-US, en-US-POSIX
+  // https://en.wikipedia.org/wiki/IETF_language_tag#Syntax_of_language_tags
+  static LOCALE_RE = /([A-Za-z\d]+)(-[A-Za-z\d]){0,2}/
+
   static parse(locales: Locale): string[] {
-    return locales?.split(',').map((l) => l.trim()) || []
+    const parsed = locales?.split(',').map((l) => l.trim()) || []
+    for (const locale of parsed) {
+      if (!LocaleList.LOCALE_RE.test(locale)) {
+        throw new Error(`Invalid locale: ${locale}`)
+      }
+    }
+    return parsed
   }
 
   static stringify(locales: string[]): Locale {
