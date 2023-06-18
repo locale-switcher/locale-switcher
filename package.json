@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://github.com/locale-switcher/locale-switcher/",
   "scripts": {
-    "prepare": "shx sed -i 's/\\*zoom/zoom/g' node_modules/tachyons/css/tachyons.min.css",
+    "prepare": "shx sed -i \"s/\\*zoom/zoom/g\" node_modules/tachyons/css/tachyons.min.css",
     "check": "tsc",
     "locale:download": "node scripts/download-locales.mjs",
     "clean": "shx rm -rf dist .parcel-cache web-ext-artifacts",
