@@ -1,12 +1,15 @@
 {
-  "manifest_version": 2,
+  "$schema": "https://json.schemastore.org/chrome-manifest",
+  "manifest_version": 3,
   "name": "Locale Switcher",
   "version": "1.2.5",
   "description": "Lets you quickly switch the browser locale to test localization on your website.",
-  "permissions": ["storage", "webRequest", "webRequestBlocking", "<all_urls>"],
+  "permissions": ["storage", "webRequest", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
   "minimum_chrome_version": "72",
   "background": {
-    "scripts": ["./src/background/index.ts"]
+    "service_worker": "./src/background/index.ts",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -16,7 +19,7 @@
       "all_frames": true
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": {
       "256": "icons/256.png"
     },
@@ -26,7 +29,7 @@
     "256": "icons/256.png"
   },
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+L"
       }

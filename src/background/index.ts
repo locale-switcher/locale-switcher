@@ -41,7 +41,7 @@ async function getCurrentTabId() {
 async function setBadge(tabId: number) {
   updatePopupState(tabId)
   const locale: Locale = getLocaleForTab(tabId) || null
-  browser.browserAction.setBadgeText({ text: locale })
+  browser.action.setBadgeText({ text: locale })
 }
 
 // Intercept Accept-Language headers
@@ -50,6 +50,33 @@ const options: WebRequest.OnBeforeSendHeadersOptions[] = ['blocking', 'requestHe
 if (chrome.webRequest.OnBeforeSendHeadersOptions.hasOwnProperty('EXTRA_HEADERS')) {
   options.push('extraHeaders')
 }
+browser.declarativeNetRequest.updateDynamicRules({
+  addRules: [
+    {
+      id: 1,
+      priority: 1,
+      action: {
+        type: 'modifyHeaders',
+        requestHeaders: [
+          { 
+            header: headerKey, 
+            operation: 'set', 
+            value: headerValue
+          },
+        ],
+      },
+      condition: {
+        regexFilter: '|http*',
+        resourceTypes: [
+          'main_frame',
+          'sub_frame',
+          'script'
+        ],
+      },
+    },
+  ],
+  removeRuleIds: [1]
+});
 browser.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
     const locale = getLocaleForTab(details.tabId)
