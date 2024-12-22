@@ -25,26 +25,30 @@
     }
   },
   "dependencies": {
-    "fuse.js": "^6.6.2",
+    "fuse.js": "^7.0.0",
     "locale-emoji": "^0.3.0",
-    "sortablejs": "^1.15.0",
+    "sortablejs": "^1.15.6",
     "tachyons": "^4.12.0",
-    "webextension-polyfill": "^0.10.0"
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
-    "@parcel/config-webextension": "^2.8.2",
-    "@parcel/core": "^2.8.2",
-    "@types/webextension-polyfill": "^0.8.3",
-    "axios": "^1.2.1",
-    "jsdom": "^20.0.3",
+    "@parcel/config-webextension": "^2.13.3",
+    "@parcel/core": "^2.13.3",
+    "@types/webextension-polyfill": "^0.12.1",
+    "axios": "^1.7.9",
+    "jsdom": "^25.0.1",
     "npm-run-all": "^4.1.5",
-    "parcel": "^2.8.2",
+    "parcel": "^2.13.3",
     "parcel-transformer-svelte": "^1.2.3",
-    "postcss": "^8.4.20",
+    "parcel-transformer-svelte-4": "^1.2.5",
+    "postcss": "^8.4.49",
     "shx": "^0.3.4",
     "svelte": "^3.55.0",
     "svelte-preprocess": "^4.10.7",
     "typescript": "^4.9.4",
-    "web-ext": "^7.4.0"
+    "web-ext": "^8.3.0"
+  },
+  "@parcel/resolver-default": {
+    "packageExports": true
   }
 }
