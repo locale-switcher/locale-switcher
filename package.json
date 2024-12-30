@@ -11,7 +11,9 @@
     "dev": "parcel watch --target dev --no-hmr ./manifest.json",
     "build": "parcel build --target prod ./manifest.json",
     "pack": "web-ext build -s dist/prod --overwrite-dest",
-    "dist": "run-s check clean build pack"
+    "dist": "run-s check clean build pack",
+    "patch-firefox": "node scripts/patch-firefox-manifest.mjs",
+    "dist-firefox": "run-s check clean build patch-firefox pack"
   },
   "targets": {
     "dev": {

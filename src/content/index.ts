@@ -50,6 +50,7 @@ function handleMessage(message: MessageType) {
   }
 }
 
+//@ts-expect-error
 browser.runtime.onMessage.addListener((message) => handleMessage(message))
 
 embedScript()

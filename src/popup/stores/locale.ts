@@ -12,6 +12,7 @@ export function update() {
 update()
 
 // Listen for the current locale
+//@ts-expect-error
 browser.runtime.onMessage.addListener((message: MessageType) => {
   switch (message.type) {
     case 'setPopupLocale':

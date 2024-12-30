@@ -21,49 +21,40 @@ function getLocaleForTab(tabId: number) {
 }
 
 function updateDeclarativeNetRequest(tabId: number, value: Locale) {
-  const acceptLanguage = LocaleList.parse(value)
-    // Add quality score https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language#directives
-    .map((l, i) => (i === 0 ? l : `${l};q=0.${Math.max(10 - i, 1)}`))
-    .join(', ')
-  browser.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [tabId],
-    addRules: [
-      {
-        id: tabId,
-        priority: 1,
-        action: {
-          type: 'modifyHeaders',
-          requestHeaders: [
-            {
-              operation: 'set',
-              header: 'Accept-Language',
-              value: acceptLanguage,
-            },
-          ],
+  if (value) {
+    const acceptLanguage = LocaleList.parse(value)
+      // Add quality score https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language#directives
+      .map((l, i) => (i === 0 ? l : `${l};q=0.${Math.max(10 - i, 1)}`))
+      .join(', ')
+    browser.declarativeNetRequest.updateSessionRules({
+      removeRuleIds: [tabId],
+      addRules: [
+        {
+          id: tabId,
+          priority: 1,
+          action: {
+            type: 'modifyHeaders',
+            requestHeaders: [
+              {
+                operation: 'set',
+                header: 'Accept-Language',
+                value: acceptLanguage,
+              },
+            ],
+          },
+          condition: {
+            tabIds: [tabId],
+            //@ts-expect-error wrong typing
+            resourceTypes: Object.values(browser.declarativeNetRequest.ResourceType),
+          },
         },
-        condition: {
-          tabIds: [tabId],
-          resourceTypes: [
-            'csp_report',
-            'font',
-            'image',
-            'main_frame',
-            'media',
-            'object',
-            'other',
-            'ping',
-            'script',
-            'stylesheet',
-            'sub_frame',
-            'webbundle',
-            'websocket',
-            'webtransport',
-            'xmlhttprequest',
-          ],
-        },
-      },
-    ],
-  })
+      ],
+    })
+  } else {
+    browser.declarativeNetRequest.updateSessionRules({
+      removeRuleIds: [tabId],
+    })
+  }
 
   ram.set(tabId, value)
 }
@@ -107,6 +98,7 @@ function updatePopupState(tabId: number) {
 }
 
 // Listener for messages from content scripts
+//@ts-expect-error
 browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
   switch (message.type) {
     case 'setBackgroundLocaleFromTab': {
@@ -119,7 +111,7 @@ browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
       let tabIds: number[] = []
       if (settings.global) {
         await set({ globalLocale: message.data })
-        const tabs = await Browser.tabs.query({})
+        const tabs = await browser.tabs.query({})
         tabs.forEach((tab) => tabIds.push(tab.id!))
       } else {
         const tabId = await getCurrentTabId()
@@ -137,5 +129,7 @@ browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
     }
   }
   // Does not work unfortunately
+  // Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+  // still occurs.
   return Promise.resolve('Dummy response to keep the console quiet')
 })
