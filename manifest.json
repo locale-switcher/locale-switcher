@@ -22,7 +22,7 @@
   "web_accessible_resources": [
     {
       "matches": ["*://*/*"],
-      "resources": ["./src/page-script.js"]
+      "resources": ["./src/page-scripts/override-language.js"]
     }
   ],
   "action": {
