@@ -1,5 +1,4 @@
-import Browser from 'webextension-polyfill'
-import browser, { WebRequest } from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 import { get, set, Settings } from '../shared/settings'
 import { LocaleList } from '../shared/utils'
 import type { Locale, MessageType } from '../types'
@@ -9,7 +8,7 @@ let settings: Settings
 
 // Setup and subscribe to settings
 get().then((data) => (settings = data))
-Browser.storage.onChanged.addListener(async (changes) => {
+browser.storage.onChanged.addListener(async (changes) => {
   for (const [key, change] of Object.entries(changes)) {
     // @ts-ignore
     settings[key] = change.newValue
@@ -21,6 +20,54 @@ function getLocaleForTab(tabId: number) {
   return ram.get(tabId) || null
 }
 
+function updateDeclarativeNetRequest(tabId: number, value: Locale) {
+  const acceptLanguage = LocaleList.parse(value)
+    // Add quality score https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language#directives
+    .map((l, i) => (i === 0 ? l : `${l};q=0.${Math.max(10 - i, 1)}`))
+    .join(', ')
+  browser.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: [tabId],
+    addRules: [
+      {
+        id: tabId,
+        priority: 1,
+        action: {
+          type: 'modifyHeaders',
+          requestHeaders: [
+            {
+              operation: 'set',
+              header: 'Accept-Language',
+              value: acceptLanguage,
+            },
+          ],
+        },
+        condition: {
+          tabIds: [tabId],
+          resourceTypes: [
+            'csp_report',
+            'font',
+            'image',
+            'main_frame',
+            'media',
+            'object',
+            'other',
+            'ping',
+            'script',
+            'stylesheet',
+            'sub_frame',
+            'webbundle',
+            'websocket',
+            'webtransport',
+            'xmlhttprequest',
+          ],
+        },
+      },
+    ],
+  })
+
+  ram.set(tabId, value)
+}
+
 function updateLocale(tabId: number, value: Locale) {
   value ||= null
   if (value === ram.get(tabId)) return
@@ -29,7 +76,7 @@ function updateLocale(tabId: number, value: Locale) {
     data: { locale: value, type: settings.persist && !settings.global ? 'local' : 'session' },
   }
   browser.tabs.sendMessage(tabId, msg)
-  ram.set(tabId, value)
+  updateDeclarativeNetRequest(tabId, value)
   setBadge(tabId)
 }
 
@@ -43,58 +90,6 @@ async function setBadge(tabId: number) {
   const locale: Locale = getLocaleForTab(tabId) || null
   browser.action.setBadgeText({ text: locale })
 }
-
-// Intercept Accept-Language headers
-const options: WebRequest.OnBeforeSendHeadersOptions[] = ['blocking', 'requestHeaders']
-// @ts-ignore
-if (chrome.webRequest.OnBeforeSendHeadersOptions.hasOwnProperty('EXTRA_HEADERS')) {
-  options.push('extraHeaders')
-}
-browser.declarativeNetRequest.updateDynamicRules({
-  addRules: [
-    {
-      id: 1,
-      priority: 1,
-      action: {
-        type: 'modifyHeaders',
-        requestHeaders: [
-          { 
-            header: headerKey, 
-            operation: 'set', 
-            value: headerValue
-          },
-        ],
-      },
-      condition: {
-        regexFilter: '|http*',
-        resourceTypes: [
-          'main_frame',
-          'sub_frame',
-          'script'
-        ],
-      },
-    },
-  ],
-  removeRuleIds: [1]
-});
-browser.webRequest.onBeforeSendHeaders.addListener(
-  (details) => {
-    const locale = getLocaleForTab(details.tabId)
-    if (!locale) return
-    for (const header of details.requestHeaders || []) {
-      if (header.name.toLowerCase() === 'accept-language') {
-        header.value = LocaleList.parse(locale)
-          // Add quality score https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language#directives
-          .map((l, i) => (i === 0 ? l : `${l};q=0.${Math.max(10 - i, 1)}`))
-          .join(', ')
-        break
-      }
-    }
-    return { requestHeaders: details.requestHeaders || [] }
-  },
-  { urls: ['<all_urls>'] },
-  options
-)
 
 // Update on tab change or new urls
 browser.tabs.onActivated.addListener((tabId) => {
@@ -141,4 +136,6 @@ browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
       if (tabId) updatePopupState(tabId)
     }
   }
+  // Does not work unfortunately
+  return Promise.resolve('Dummy response to keep the console quiet')
 })
