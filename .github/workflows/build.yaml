@@ -16,6 +16,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run dist
+      - run: pnpm run dist-firefox
 
       - name: Artifacts
         uses: actions/upload-artifact@v3

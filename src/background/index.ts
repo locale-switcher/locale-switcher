@@ -55,8 +55,6 @@ function updateDeclarativeNetRequest(tabId: number, value: Locale) {
       removeRuleIds: [tabId],
     })
   }
-
-  ram.set(tabId, value)
 }
 
 function updateLocale(tabId: number, value: Locale) {
@@ -68,6 +66,7 @@ function updateLocale(tabId: number, value: Locale) {
   }
   browser.tabs.sendMessage(tabId, msg)
   updateDeclarativeNetRequest(tabId, value)
+  ram.set(tabId, value)
   setBadge(tabId)
 }
 
@@ -128,8 +127,7 @@ browser.runtime.onMessage.addListener(async (message: MessageType, sender) => {
       if (tabId) updatePopupState(tabId)
     }
   }
-  // Does not work unfortunately
-  // Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
-  // still occurs.
-  return Promise.resolve('Dummy response to keep the console quiet')
+  // Sometimes Exception:
+  // "Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist."
+  // occurs but this causes no harm.
 })

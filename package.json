@@ -10,10 +10,11 @@
     "clean": "shx rm -rf dist .parcel-cache web-ext-artifacts",
     "dev": "parcel watch --target dev --no-hmr ./manifest.json",
     "build": "parcel build --target prod ./manifest.json",
-    "pack": "web-ext build -s dist/prod --overwrite-dest",
+    "pack": "web-ext build -s dist/prod --overwrite-dest -n '{name}-{version}.zip'",
+    "pack-firefox": "web-ext build -s dist/prod --overwrite-dest -n '{name}-{version}-firefox.zip'",
     "dist": "run-s check clean build pack",
     "patch-firefox": "node scripts/patch-firefox-manifest.mjs",
-    "dist-firefox": "run-s check clean build patch-firefox pack"
+    "dist-firefox": "run-s check clean build patch-firefox pack-firefox"
   },
   "targets": {
     "dev": {
@@ -41,7 +42,6 @@
     "jsdom": "^25.0.1",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.13.3",
-    "parcel-transformer-svelte": "^1.2.3",
     "parcel-transformer-svelte-4": "^1.2.5",
     "postcss": "^8.4.49",
     "shx": "^0.3.4",
