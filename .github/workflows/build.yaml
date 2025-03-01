@@ -16,16 +16,19 @@ jobs:
       - run: pnpm run zip
 
       - name: Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Extension
           path: .output/*.zip
-      # - name: Sign
-      #   uses: tristan-weil/ghaction-checksum-sign-artifact@v1
-      #   with:
-      #     path: web-ext-artifacts/*.zip
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   if: startsWith(github.ref, 'refs/tags/')
-      #   with:
-      #     files: web-ext-artifacts/*.zip
+      - name: Generate checksum
+        uses: jmgilman/actions-generate-checksum@v1
+        with:
+          patterns: |
+            .output/*.zip
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            checksum.txt
+            .output/*.zip
