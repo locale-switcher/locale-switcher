@@ -15,16 +15,16 @@ jobs:
       - run: pnpm install
       - run: pnpm run zip
 
-      - name: Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Extension
-          path: .output/*.zip
       - name: Generate checksum
         uses: jmgilman/actions-generate-checksum@v1
         with:
           patterns: |
             .output/*.zip
+      - name: Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Extension
+          path: .output
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
