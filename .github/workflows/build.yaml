@@ -6,28 +6,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run dist
+      - run: pnpm install
+      - run: pnpm run zip
 
       - name: Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: Extension
-          path: web-ext-artifacts/*.zip
-      - name: Sign
-        uses: tristan-weil/ghaction-checksum-sign-artifact@v1
-        with:
-          path: web-ext-artifacts/*.zip
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: web-ext-artifacts/*.zip
+          path: .output/*.zip
+      # - name: Sign
+      #   uses: tristan-weil/ghaction-checksum-sign-artifact@v1
+      #   with:
+      #     path: web-ext-artifacts/*.zip
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     files: web-ext-artifacts/*.zip

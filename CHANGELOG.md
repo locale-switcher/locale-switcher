@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.3.0]
 
+Many many thanks to @sirchnik who bringing this initiative forward and creating a first [PR](https://github.com/locale-switcher/locale-switcher/pull/62) ❤️
+
 ### Fixed
 
 - Manifest V3

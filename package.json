@@ -1,6 +1,5 @@
 {
-  "name": "wxt-svelte-starter",
-  "version": "0.0.0",
+  "name": "locale-switcher",
   "private": true,
   "description": "manifest.json description",
   "type": "module",
@@ -11,8 +10,7 @@
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
     "postinstall": "wxt prepare",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox"
+    "zip": "tsx scripts/zip.ts"
   },
   "dependencies": {
     "fuse.js": "^7.1.0",
@@ -27,8 +25,10 @@
     "svelte": "^5.1.16",
     "svelte-check": "^4.0.7",
     "tslib": "^2.8.1",
+    "tsx": "^4.19.3",
     "typescript": "^5.6.3",
-    "wxt": "^0.19.13"
+    "wxt": "^0.19.13",
+    "zx": "^8.3.2"
   },
   "packageManager": "pnpm@10.5.2"
 }
