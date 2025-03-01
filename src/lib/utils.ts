@@ -1,4 +1,4 @@
-import { Locale } from '../types'
+import { Locale } from '../entrypoints/shared/types'
 
 export class LocaleList {
   // RegExp for 1 to 3 level language codes. Examples: en, en-US, en-US-POSIX

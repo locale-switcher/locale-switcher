@@ -6,28 +6,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - uses: pnpm/action-setup@v2
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+
+      - run: pnpm install
+      - run: pnpm run zip
+
+      - name: Generate checksum
+        uses: jmgilman/actions-generate-checksum@v1
         with:
-          version: 7
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run dist
-
+          patterns: |
+            .output/*.zip
       - name: Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Extension
-          path: web-ext-artifacts/*.zip
-      - name: Sign
-        uses: tristan-weil/ghaction-checksum-sign-artifact@v1
-        with:
-          path: web-ext-artifacts/*.zip
+          path: .output
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: web-ext-artifacts/*.zip
+          files: |
+            checksum.txt
+            .output/*.zip

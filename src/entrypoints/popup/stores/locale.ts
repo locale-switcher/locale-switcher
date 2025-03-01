@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store'
-import browser from 'webextension-polyfill'
-import type { Locale, MessageType } from '../../types'
+import type { Locale, MessageType } from '../../../lib/types'
 
 export const locale = writable<Locale>(null)
 

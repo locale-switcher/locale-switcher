@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
   import Sortable from 'sortablejs'
   import { onMount } from 'svelte'
-  import { LocaleList } from '../../shared/utils'
   import Multiple from '../icons/Multiple.svelte'
   import { locale } from '../stores/locale'
   import { Settings } from '../stores/settings'
   import Item from './Item.svelte'
   import Row from './Row.svelte'
   import Switch from './Switch.svelte'
+  import { LocaleList } from '@/lib/utils.js'
 
   let list
   $: selected = $locale ? $locale.split(',') : []

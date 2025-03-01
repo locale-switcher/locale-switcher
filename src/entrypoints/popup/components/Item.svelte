@@ -1,10 +1,10 @@
 <script>
   import localeEmoji from 'locale-emoji'
-  import { LocaleList } from '../../shared/utils'
+  import { LocaleList } from '@/lib/utils'
   import Menu from '../icons/Menu.svelte'
   import Star from '../icons/Star.svelte'
   import StarFilled from '../icons/StarFilled.svelte'
-  import locales from '../lib/locales.json'
+  import locales from '@/lib/locales.json'
   import { locale } from '../stores/locale'
   import { isStarred, Settings, star } from '../stores/settings'
 

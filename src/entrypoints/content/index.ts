@@ -1,6 +1,5 @@
-import browser from 'webextension-polyfill'
-import { LocaleList } from '../shared/utils'
-import type { Locale, MessageType } from '../types'
+import type { Locale, MessageType } from '@/lib/types.js'
+import { LocaleList } from '@/lib/utils'
 
 const KEY = 'LOCALE_SWITCHER_LANGUAGE'
 
@@ -18,23 +17,12 @@ function embedScript() {
   if (!locale) return
 
   const locales = LocaleList.parse(locale)
-  const asString = `[${locales.map((l) => `"${l}"`).join(', ')}]`
-  const code = `
-    (() => {
-      Object.defineProperties(window.navigator.__proto__, {
-        language: {
-          value: '${locales[0]}',
-          enumerable: true,
-        },
-        languages: {
-          value: ${asString},
-          enumerable: true,
-        }
-      });
-    })();`
-
+  const language = locales[0]!
+  const languages = JSON.stringify(locales)
   const script = document.createElement('script')
-  script.textContent = code
+  script.setAttribute('data-language', language)
+  script.setAttribute('data-languages', languages)
+  script.src = browser.runtime.getURL('/override-language.js')
   document.documentElement.prepend(script)
   script.remove()
 }
@@ -60,7 +48,15 @@ function handleMessage(message: MessageType) {
   }
 }
 
-browser.runtime.onMessage.addListener((message) => handleMessage(message))
+export default defineContentScript({
+  matches: ['<all_urls>'],
+  runAt: 'document_start',
+  allFrames: true,
+  main() {
+    //@ts-expect-error
+    browser.runtime.onMessage.addListener((message) => handleMessage(message))
 
-embedScript()
-sendCurrentState()
+    embedScript()
+    sendCurrentState()
+  },
+})

@@ -1,7 +1,7 @@
 import { derived, writable } from 'svelte/store'
-import { get, set } from '../../shared/settings'
-import { toggleInArray } from '../../shared/utils'
-import { Locale } from '../../types'
+import { get, set } from '../../../lib/settings'
+import { toggleInArray } from '../../../lib/utils'
+import { Locale } from '../../../lib/types'
 
 export type Settings = {
   starred: string[]

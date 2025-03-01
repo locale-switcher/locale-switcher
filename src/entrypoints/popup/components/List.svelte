@@ -2,7 +2,7 @@
   import Fuse from 'fuse.js'
   import { onMount } from 'svelte'
   import StarFilled from '../icons/StarFilled.svelte'
-  import locales from '../lib/locales.json'
+  import locales from '@/lib/locales.json'
   import { locale } from '../stores/locale'
   import { Settings, star } from '../stores/settings'
   import Item from './Item.svelte'

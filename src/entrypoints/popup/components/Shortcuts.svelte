@@ -19,7 +19,7 @@
     {/if}
   </div>
 
-  <div class:expanded class="shortcuts flex items-start  code">
+  <div class:expanded class="shortcuts flex items-start code">
     <div>
       <ArrowUp />
       <kbd>Up</kbd>
@@ -30,7 +30,7 @@
       <ArrowRight />
       <kbd>Star</kbd>
     </div>
-    <div class="ml3" />
+    <div class="ml3"></div>
     <div>
       <Enter />
       <kbd>Select</kbd>

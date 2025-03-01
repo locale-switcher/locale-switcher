@@ -1,5 +1,4 @@
-import Browser from 'webextension-polyfill'
-import { Locale } from '../types'
+import { Locale } from '../entrypoints/shared/types'
 
 export type Settings = {
   starred: string[]
@@ -20,7 +19,7 @@ export const initial: Settings = {
 }
 
 export async function get() {
-  const data = await Browser.storage.local.get()
+  const data = await browser.storage.local.get()
   return {
     ...initial,
     ...data,
@@ -28,5 +27,5 @@ export async function get() {
 }
 
 export async function set(settings: Partial<Settings>) {
-  await Browser.storage.local.set(settings)
+  await browser.storage.local.set(settings)
 }
