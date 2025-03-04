@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1]
+
+### Changed
+
+- Drop permissions for manifest V3
+
 ## [1.3.0]
 
 Many many thanks to @sirchnik who bringing this initiative forward and creating a first [PR](https://github.com/locale-switcher/locale-switcher/pull/62) ❤️

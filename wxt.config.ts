@@ -1,12 +1,12 @@
 import { defineConfig } from 'wxt'
 
-export const version = '1.3.0'
+export const version = '1.3.1'
 
 export default defineConfig({
   srcDir: 'src',
   extensionApi: 'webextension-polyfill',
   modules: ['@wxt-dev/module-svelte'],
-  manifest: () => {
+  manifest: ({ manifestVersion }) => {
     return {
       version,
 
@@ -16,8 +16,11 @@ export default defineConfig({
       homepage_url: 'https://github.com/locale-switcher/locale-switcher',
 
       // Config
-      permissions: ['storage', 'declarativeNetRequest', 'activeTab', 'scripting'],
-      host_permissions: ['<all_urls>'],
+      permissions:
+        manifestVersion === 3
+          ? ['storage', 'declarativeNetRequest', 'activeTab']
+          : ['storage', 'declarativeNetRequest', 'activeTab', 'scripting'],
+      host_permissions: manifestVersion === 3 ? undefined : ['<all_urls>'],
       web_accessible_resources: [
         {
           matches: ['*://*/*'],
