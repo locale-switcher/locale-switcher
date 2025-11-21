@@ -49,8 +49,8 @@ importers:
         specifier: ^0.19.13
         version: 0.19.27(@types/node@22.13.5)(rollup@4.34.8)(tsx@4.19.3)
       zx:
-        specifier: ^8.3.2
-        version: 8.3.2
+        specifier: ^8.8.5
+        version: 8.8.5
 
 packages:
 
@@ -731,17 +731,11 @@ packages:
   '@types/filewriter@0.0.33':
     resolution: {integrity: sha512-xFU8ZXTw4gd358lb2jw25nxY9QAgqn2+bKKjKOYfNCzN4DKCFetK7sPtrlpg66Ywe3vWY9FNxprZawAh9wfJ3g==}
 
-  '@types/fs-extra@11.0.4':
-    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
-
   '@types/har-format@1.2.16':
     resolution: {integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==}
 
   '@types/http-cache-semantics@4.0.4':
     resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
-
-  '@types/jsonfile@6.1.4':
-    resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
   '@types/minimatch@3.0.5':
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
@@ -2539,8 +2533,8 @@ packages:
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
-  zx@8.3.2:
-    resolution: {integrity: sha512-qjTunv1NClO05jDaUjrNZfpqC9yvNCchge/bzOcQevsh1aM5qE3TG6MY24kuQKlOWx+7vNuhqO2wa9nQCIGvZA==}
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -2972,20 +2966,9 @@ snapshots:
 
   '@types/filewriter@0.0.33': {}
 
-  '@types/fs-extra@11.0.4':
-    dependencies:
-      '@types/jsonfile': 6.1.4
-      '@types/node': 22.13.5
-    optional: true
-
   '@types/har-format@1.2.16': {}
 
   '@types/http-cache-semantics@4.0.4': {}
-
-  '@types/jsonfile@6.1.4':
-    dependencies:
-      '@types/node': 22.13.5
-    optional: true
 
   '@types/minimatch@3.0.5': {}
 
@@ -4943,7 +4926,4 @@ snapshots:
 
   zod@3.24.2: {}
 
-  zx@8.3.2:
-    optionalDependencies:
-      '@types/fs-extra': 11.0.4
-      '@types/node': 22.13.5
+  zx@8.8.5: {}
